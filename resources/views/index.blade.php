@@ -1,19 +1,28 @@
 @extends('layouts.before_login_header')
 <style>
+  .container {
+  }
   .content {
     margin: 0 100px;
   }
   .card {
-    width: 20%;
+    float: left;
+    width: 23%;
+    margin-right: calc(5% / 3);
+    margin-top: 24px;
     background: white;
     border-radius: 7px;
   }
-  .img {
+  .card:nth-of-type(4n) {
+    margin-right: 0;
+  }
+  .img img {
     width: 100%;
-    height: 20vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     border-top-right-radius: 7px;
     border-top-left-radius: 7px;
-    background: url(https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg) center/cover no-repeat;
   }
   .card-content {
     padding: 20px;
@@ -47,21 +56,45 @@
 @section('title', 'Rese')
 
 @section('content')
-<div>
-  @foreach ($items as $item)
+<div class="container">
+  <form action="" method="get">
+   <div class="search-form">
+    <select name="area_id">
+      <option value="">All areas</option>
+      @foreach ($areas as $area)
+        @if ($area->id == $area_id)
+          <option value="{{ $area->id }}" selected>{{ $area->area }}</option>
+        @else
+          <option value="{{ $area->id }}">{{ $area->area }}</option>
+        @endif
+      @endforeach
+    </select>
+    <select name="genre_id">
+      <option value="">All genres</option>
+      @foreach ($genres as $genre)
+        @if ($genre->id == $genre_id)
+          <option value="{{ $genre->id }}" selected>{{ $genre->genre }}</option>
+        @else
+          <option value="{{ $genre->id }}">{{ $genre->genre }}</option>
+        @endif
+      @endforeach
+    </select>
+    <input type="search" placeholder="Search..." name="search_name" value="@if (isset($search_name)) {{ $search_name }} @endif">
+    <button type="submit">search</button>
+   </div>
+  </form>
+  @foreach ($shops as $shop)
   <article class="card">
     <div class="img">
+      <img src="{{ $shop->genre->image }}" alt="">
     </div>
     <section class="card-content">
-      <form action="/detail" method="get">
-        @csrf
-        <h3 class="card-ttl">{{ $item->name }}</h3>
-        <p class="card-tag"># #</p>
+        <h3 class="card-ttl">{{ $shop->name }}</h3>
+        <p class="card-tag">#{{ $shop->area->area }} #{{ $shop->genre->genre }}</p>
         <div class="btn-wrap">
-          <button class="btn">詳しくみる</button>
+          <a href="/detail/{{ $shop->id }}"><button class="btn">詳しくみる</button></a>
           <i class="fa-solid fa-heart"><input type="hidden"></i>
         </div>
-      </form>
     </section>
   </article>
   @endforeach

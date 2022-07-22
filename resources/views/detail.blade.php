@@ -1,30 +1,40 @@
 @extends('layouts.after_login_header')
 <style>
-
+  .container {
+    display: flex;
+    padding: 0 100px;
+    justify-content: space-between;
+  }
+.wrap {
+  width: 47%;
+}
+img {
+  width: 100%;
+}
 </style>
 @section('title', 'Rese')
 
 @section('content')
 <div class="container">
-  <article class="shop-wrap">
+  <article class="wrap shop-wrap">
     <div class="shop-ttl">
-      <button>return</button>
-      <h2>仙人</h2>
+      <a href="/"><</a>
+      <h2>{{ $shop->name }}</h2>
     </div>
-    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="">
+    <img src="{{ $shop->genre->image }}" alt="">
     <section class="shop-content">
-      <p class="shop-tag"></p>
-      <p class="shop-detail"></p>
+      <p class="shop-tag">#{{ $shop->area->area }} #{{ $shop->genre->genre }}</p>
+      <p class="shop-detail">{{ $shop->shop_detail }}</p>
     </section>
   </article>
-  <div class="reservation-wrap">
+  <div class="wrap reservation-wrap">
     <h2>予約</h2>
     <form action="/done" method="post">
       @csrf
       <div class="input-form">
-        <input type="text">
-        <input type="text">
-        <input type="text">
+        <input type="date"><!-- 日付 -->
+        <input type="time"><!-- 時間 -->
+        <input type="text"><!-- 人数 -->
       </div>
       <table>
         <tr>
@@ -32,15 +42,15 @@
           <td></td>
         </tr>
         <tr>
-          <th>Shop</th>
+          <th>Date</th>
           <td></td>
         </tr>
         <tr>
-          <th>Shop</th>
+          <th>Time</th>
           <td></td>
         </tr>
         <tr>
-          <th>Shop</th>
+          <th>Number</th>
           <td></td>
         </tr>
       </table>

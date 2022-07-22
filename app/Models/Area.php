@@ -12,10 +12,10 @@ class Area extends Model
     protected $table = 'areas';
 
     protected $fillable = [
-      'name'
+      'area'
     ];
 
-    public function shops()
+    public function shop()
     {
       return $this->hasMany(Shop::class);
     }

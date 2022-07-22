@@ -12,10 +12,12 @@ class Genre extends Model
     protected $table = 'genres';
 
     protected $fillable = [
-      'name'
+      'genre',
+      'image',
     ];
 
-    public function shops()
+    public function shop()
     {
       return $this->hasMany(Shop::class);
-    }}
+    }
+}

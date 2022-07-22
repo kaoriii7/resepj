@@ -15,13 +15,14 @@ use App\Http\Controllers\ShopController;
 */
 
 Route::get('/', [ShopController::class, 'index']);
-Route::get('/detail', [ShopController::class, 'detail']);
+Route::get('/detail/{id}/', [ShopController::class, 'detail']);
 Route::post('/done', [ShopController::class, 'done']);
 Route::get('/register', [ShopController::class, 'register']);
 Route::post('/thanks', [ShopController::class, 'thanks']);
 Route::get('/auth', [ShopController::class,'check']);
 Route::post('/mypage', [ShopController::class,'checkUser']);
-Route::get('/', [ShopController::class, 'getlogout']);
+// アクセス先のリンク（shopのところ）は未確定↓
+Route::get('/shop', [ShopController::class, 'getlogout']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

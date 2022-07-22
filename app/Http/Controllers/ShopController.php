@@ -3,20 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\Area;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-      $items = Shop::all();
-      return view('index', compact('items'));
+      $shops = Shop::all();
+      $areas = Area::all();
+      $genres = Genre::all();
+
+      $area_id = $request->input('area_id');
+      $genre_id = $request->input('genre_id');
+      $search_name = $request->input('search_name');
+
+      $query = Shop::query();
+
+      if ($area_id)  {
+        $shops = $query->where('area_id', $area_id)->get();
+      }
+
+      if ($genre_id)  {
+        $shops = $query->where('genre_id', $genre_id)->get();
+      }
+
+      if ($search_name) {
+        $shops = $query->where('name', 'like', '%'.$search_name.'%')->get();
+      }
+
+      return view('index', compact('shops', 'areas', 'genres', 'area_id', 'genre_id', 'search_name', ));
     }
 
-    public function detail()
+    public function detail($id)
     {
-      return view('detail');
+      $shop = Shop::find($id);
+      return view('detail', compact('shop'));
     }
 
     public function done(Request $request)
