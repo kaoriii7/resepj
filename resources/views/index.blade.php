@@ -57,6 +57,7 @@
 
 @section('content')
 <div class="container">
+  <p>branchtest</p>
   <form action="" method="get">
    <div class="search-form">
     <select name="area_id">
