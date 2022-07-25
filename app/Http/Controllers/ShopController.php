@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
+use App\Models\Time;
+use App\Models\Person;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,10 +40,16 @@ class ShopController extends Controller
       return view('index', compact('shops', 'areas', 'genres', 'area_id', 'genre_id', 'search_name', ));
     }
 
-    public function detail($id)
+    public function detail($id, Request $request)
     {
       $shop = Shop::find($id);
-      return view('detail', compact('shop'));
+      $times = Time::all();
+      $persons = Person::all();
+
+      $time_id = $request->input('time_id');
+      $person_id = $request->input('person_id');
+
+      return view('detail', compact('shop', 'times', 'time_id', 'persons', 'person_id'));
     }
 
     public function done(Request $request)

@@ -48,10 +48,10 @@
     color: #fff;
     cursor: pointer;
   }
-   .fa-heart {
+  .fa-heart {
     color: #E6E6FA;
     font-size: 40px;
-   }
+  }
 </style>
 @section('title', 'Rese')
 
