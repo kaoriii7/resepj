@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
           TimesTableSeeder::class,
           PersonsTableSeeder::class,
           ReservationsTableSeeder::class,
+          LikesTableSeeder::class,
         ]);
     }
 }

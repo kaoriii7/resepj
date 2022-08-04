@@ -47,10 +47,11 @@
   </article>
   <div class="wrap reservation-wrap">
     <h2>予約</h2>
-    <form action="/done" method="post">
+    <form action="/mypage" method="post">
       @csrf
       <div class="input-form">
-        <input id="date_id" type="date">
+        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+        <input  type="date" id="date_id" name="reservation_date">
         <select id="time_id" name="time_id">
           @foreach ($times as $time)
             <option>{{ $time->reservation_time }}</option>
@@ -65,6 +66,7 @@
       <table>
         <tr>
           <th>Shop</th>
+          <input type="hidden" name="shop_id" value="{{ $shop->id }}">
           <td>{{ $shop->name }}</td>
         </tr>
         <tr>

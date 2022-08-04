@@ -1,4 +1,4 @@
-@extends('layouts.before_login_header')
+@extends('layouts.after_login_header')
 <style>
   .container {
   }
@@ -83,6 +83,7 @@
     <button type="submit">search</button>
    </div>
   </form>
+  @if(isset($shops))
   @foreach ($shops as $shop)
   <article class="card">
     <div class="img">
@@ -93,10 +94,26 @@
         <p class="card-tag">#{{ $shop->area->area }} #{{ $shop->genre->genre }}</p>
         <div class="btn-wrap">
           <a href="/detail/{{ $shop->id }}"><button class="btn">詳しくみる</button></a>
-          <i class="fa-solid fa-heart"><input type="hidden"></i>
+          @if (!$like)
+            <form action="{{ route('like') }}" method="post">
+                @csrf
+                <input type="hidden" name="shop_id" value="{{ $shop->id }}">
+                <button type="submit">
+                  <i class="fa-solid fa-heart"></i>
+                </button>
+            </form>
+          @else
+            <form action="{{ route('unlike') }}" method="post">
+                @csrf
+                <input type="hidden" name="shop_id" value="{{ $shop->id }}">
+                <button type="submit">unlike
+                </button>
+            </form>
+          @endif
         </div>
     </section>
   </article>
   @endforeach
+  @endif
 </div>
 @endsection

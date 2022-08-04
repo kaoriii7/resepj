@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +18,19 @@ use App\Http\Controllers\ShopController;
 
 Route::get('/', [ShopController::class, 'index']);
 Route::get('/detail/{id}/', [ShopController::class, 'detail']);
-Route::post('/done', [ShopController::class, 'done']);
+Route::get('/done', [ShopController::class, 'add']);
+Route::post('/done', [ShopController::class, 'create']);
 Route::get('/register', [ShopController::class, 'register']);
 Route::post('/thanks', [ShopController::class, 'thanks']);
 Route::get('/auth', [ShopController::class,'check']);
+Route::get('/mypage', [ShopController::class,'checkUser']);
 Route::post('/mypage', [ShopController::class,'checkUser']);
+Route::get('/mypage', [UserController::class, 'mypage']);
 // アクセス先のリンク（shopのところ）は未確定↓
 Route::get('/shop', [ShopController::class, 'getlogout']);
+
+Route::post('/like', [LikeController::class, 'create'])->name('like');
+Route::post('/unlike', [LikeController::class, 'delete'])->name('unlike');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
