@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
-use App\Models\Time;
-use App\Models\Person;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,19 +78,7 @@ class ShopController extends Controller
       return view('auth', $text);
     }
 
-    public function checkUser(Request $request)
-    {
-      $email = $request->email;
-      $password = $request->password;
-      if (Auth::attempt(['email' => $email,
-              'password' => $password])) {
-          $text =   'ようこそ'. Auth::user()->name . 'さん！';
-          return view('mypage', ['text' => $text, 'email' => $email]);
-      } else {
-          $text = 'ログインに失敗しました';
-          return view('auth', ['text' => $text]);
-      }
-    }
+
 
     public function getlogout()
     {

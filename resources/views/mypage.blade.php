@@ -24,33 +24,37 @@
 
 @section('content')
 <div class="container">
-    @if (Auth::check())
-  <p class="user-name">{{ $text. ' メールアドレス：'. $email }}</p>
-  @endif
+  <p class="user-name">{{ $text }}</p>
   <div class="content-wrap">
     <div class="reservation-wrap">
       <h2 class="ttl">予約状況</h2>
-      <div class="reservation-card">
-        <h3>予約</h3>
-        <table>
-          <tr>
-            <th>Shop</th>
-            <td></td>
-          </tr>
-          <tr>
-            <th>Date</th>
-            <td></td>
-          </tr>
-          <tr>
-            <th>Time</th>
-            <td></td>
-          </tr>
-          <tr>
-            <th>Number</th>
-            <td></td>
-          </tr>
-        </table>
-      </div>
+      @foreach ($reservations as $reservation)
+      <form action="{{ route('mypage.delete') }}" method="get">
+        <div class="reservation-card">
+          <h3>予約</h3>
+          <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+          <button type="submit" class="btn">delete</button>
+          <table>
+            <tr>
+              <th>Shop</th>
+              <td>{{ $reservation->shop->name }}</td>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <td>{{ $reservation->date }}</td>
+            </tr>
+            <tr>
+              <th>Time</th>
+              <td>{{ $reservation->time }}</td>
+            </tr>
+            <tr>
+              <th>Number</th>
+              <td>{{ $reservation->person }}</td>
+            </tr>
+          </table>
+        </div>
+      </form>
+      @endforeach
     </div>
     <div class="like-wrap">
       <h2 class="ttl">お気に入り店舗</h2>

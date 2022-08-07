@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\UserControllser;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +18,18 @@ use App\Http\Controllers\ReservationController;
 
 Route::get('/', [ShopController::class, 'index']);
 Route::get('/detail/{id}/', [ShopController::class, 'detail']);
-Route::post('/done', [ReservationController::class, 'done']);
+Route::get('/done', [ReservationController::class, 'done']);
+Route::post('/done', [ReservationController::class, 'create']);
 Route::get('/register', [ShopController::class, 'register']);
 Route::post('/thanks', [ShopController::class, 'thanks']);
 Route::get('/auth', [ShopController::class,'check']);
-Route::post('/mypage', [ShopController::class,'checkUser']);
+Route::get('/mypage', [UserControllser::class,'checkUser']);
+Route::post('/mypage', [UserControllser::class,'checkUser']);
 // アクセス先のリンク（shopのところ）は未確定↓
 Route::get('/shop', [ShopController::class, 'getlogout']);
+Route::get('/mypage', [UserControllser::class, 'index']);
+Route::get('/mypage/delete/', [UserControllser::class, 'delete']);
+Route::post('/mypage/delete/', [UserControllser::class, 'delete'])->name('mypage.delete');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

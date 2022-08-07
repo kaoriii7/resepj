@@ -50,7 +50,7 @@
     <form action="/done" method="post">
       @csrf
       <div class="input-form">
-        <input id="date_id" type="date">
+        <input id="date_id" type="date" name="date">
         <select id="time_id" name="time_id">
           @foreach ($times as $time)
             <option>{{ $time }}</option>
@@ -65,6 +65,7 @@
       <table>
         <tr>
           <th>Shop</th>
+          <input type="hidden" name="shop_id" value="{{ $shop->id }}">
           <td>{{ $shop->name }}</td>
         </tr>
         <tr>
