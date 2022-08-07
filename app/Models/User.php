@@ -23,12 +23,7 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function shops()
-    {
-      return $this->hasMany(Shop::class);
-    }
-
-    public function likes()
+    public function like()
     {
       return $this->hasMany(Like::class);
     }

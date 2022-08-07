@@ -17,6 +17,7 @@ class ShopController extends Controller
     public function index(Request $request, Shop $shop)
     {
       $shops = Shop::all();
+
       $areas = Area::all();
       $genres = Genre::all();
 
@@ -35,11 +36,10 @@ class ShopController extends Controller
       if ($search_name) {
         $shops = $query->where('name', 'like', '%'.$search_name.'%')->get();
       }
+        $likes = Like::all();
+              var_dump($likes);
 
-      $like = Like::where('user_id', Auth::id())->exists();
-
-var_dump($like);
-      return view('index', compact('shops', 'areas', 'genres', 'area_id', 'genre_id', 'search_name', 'like'));
+      return view('index', compact('shops', 'areas', 'genres', 'area_id', 'genre_id', 'search_name', 'likes'));
     }
 
     public function detail($id, Request $request)
@@ -84,7 +84,8 @@ var_dump($like);
       if (Auth::attempt(['email' => $email,
               'password' => $password])) {
         $text =   'ようこそ'. Auth::user()->name . 'さん！';
-        $likes = Like::where('user_id', Auth::id())->get();
+        $likes = Like::all();
+
         return view('mypage', compact('text', 'email', 'password', 'likes'));
       } else {
           $text = 'ログインに失敗しました';

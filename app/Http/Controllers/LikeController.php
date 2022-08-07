@@ -10,17 +10,17 @@ use Illuminate\Http\Request;
 class LikeController extends Controller
 {
     public function create(Request $request) {
-      Like::create([
-        'shop_id' => $request->input('shop_id'),
-        'user_id' => Auth::id(),
-      ]);
-
-      return back();
-    }
-
-    public function delete(Request $request) {
-      $like = Like::where('shop_id', $request->shop_id)->where('user_id', Auth::id())->delete();
-      return back();
+      $like = Like::all();
+      if(!(Like::where('shop_id', $request->shop_id)->exists())) {
+        Like::create([
+          'shop_id' => $request->input('shop_id'),
+          'user_id' => Auth::id(),
+        ]);
+        return back();
+      } else {
+        $like = Like::where('user_id', Auth::id())->where('shop_id', $request->shop_id)->delete();
+        return back();
+      }
     }
 
 

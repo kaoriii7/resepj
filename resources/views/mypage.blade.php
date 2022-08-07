@@ -33,8 +33,6 @@
       <div class="reservation-card">
         @isset($reservation)
         @foreach($reservation as $d)
-                {{var_dump($reservation)}}
-
         <h3>予約</h3>
         <table>
           <tr>

@@ -16,6 +16,7 @@ class Shop extends Model
       'shop_detail',
       'area_id',
       'genre_id',
+      'like_id'
     ];
 
     public function area()
@@ -30,12 +31,8 @@ class Shop extends Model
 
     public function like()
     {
-      return $this->belongsTo(Like::class);
+      return $this->hasOne(Like::class);
     }
 
-    public function user()
-    {
-      return $this->belongsTo(User::class);
-    }
 
 }

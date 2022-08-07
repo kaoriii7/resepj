@@ -83,8 +83,8 @@
     <button type="submit">search</button>
    </div>
   </form>
-  @if(isset($shops))
   @foreach ($shops as $shop)
+  {{var_dump($shop)}}
   <article class="card">
     <div class="img">
       <img src="{{ $shop->genre->image }}" alt="">
@@ -94,26 +94,23 @@
         <p class="card-tag">#{{ $shop->area->area }} #{{ $shop->genre->genre }}</p>
         <div class="btn-wrap">
           <a href="/detail/{{ $shop->id }}"><button class="btn">詳しくみる</button></a>
-          @if (!$like)
             <form action="{{ route('like') }}" method="post">
-                @csrf
+              @csrf
+              @if ($likes->shop_id == $shop->id)
                 <input type="hidden" name="shop_id" value="{{ $shop->id }}">
                 <button type="submit">
                   <i class="fa-solid fa-heart"></i>
                 </button>
-            </form>
-          @else
-            <form action="{{ route('unlike') }}" method="post">
-                @csrf
+              @else
                 <input type="hidden" name="shop_id" value="{{ $shop->id }}">
-                <button type="submit">unlike
+                <button type="submit">
+                  unlike
                 </button>
+              @endif
             </form>
-          @endif
         </div>
     </section>
   </article>
   @endforeach
-  @endif
 </div>
 @endsection
