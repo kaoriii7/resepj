@@ -12,16 +12,6 @@ class Reservation extends Model
     protected $table = '_reservations';
 
     protected $fillable = [
-      'user_id', 'shop_id', 'reservation_date', 'time_id', 'person_id'
+      'user_id', 'shop_id', 'date', 'time', 'person'
     ];
-
-    public function time()
-    {
-      return $this->belongsTo(Time::class);
-    }
-
-    public function person()
-    {
-      return $this->belongsTo(Person::class);
-    }
 }

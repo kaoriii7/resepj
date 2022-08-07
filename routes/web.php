@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use App\Http\Controllers\ShopController;
 
 Route::get('/', [ShopController::class, 'index']);
 Route::get('/detail/{id}/', [ShopController::class, 'detail']);
-Route::post('/done', [ShopController::class, 'done']);
+Route::post('/done', [ReservationController::class, 'done']);
 Route::get('/register', [ShopController::class, 'register']);
 Route::post('/thanks', [ShopController::class, 'thanks']);
 Route::get('/auth', [ShopController::class,'check']);

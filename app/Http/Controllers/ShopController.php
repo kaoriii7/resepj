@@ -43,18 +43,35 @@ class ShopController extends Controller
     public function detail($id, Request $request)
     {
       $shop = Shop::find($id);
-      $times = Time::all();
-      $persons = Person::all();
+      $times = [
+        '17:00',
+        '17:30',
+        '18:00',
+        '18:30',
+        '19:00',
+        '19:30',
+        '20:00',
+        '20:30',
+        '21:00',
+        '21:30',
+      ];
+      $persons = [
+        '1人',
+        '2人',
+        '3人',
+        '4人',
+        '5人',
+        '6人',
+        '7人',
+        '8人',
+        '9人',
+        '10人',
+      ];
 
       $time_id = $request->input('time_id');
       $person_id = $request->input('person_id');
 
-      return view('detail', compact('shop', 'times', 'time_id', 'persons', 'person_id'));
-    }
-
-    public function done(Request $request)
-    {
-      return view('done');
+      return view('detail', compact('shop', 'times', 'persons', 'time_id', 'person_id'));
     }
 
     public function check(Request $request)

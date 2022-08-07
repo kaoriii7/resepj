@@ -53,12 +53,12 @@
         <input id="date_id" type="date">
         <select id="time_id" name="time_id">
           @foreach ($times as $time)
-            <option>{{ $time->reservation_time }}</option>
+            <option>{{ $time }}</option>
           @endforeach
         </select>
         <select id="person_id" name="person_id">
           @foreach ($persons as $person)
-            <option>{{ $person->number_of_persons }}人</option>
+            <option>{{ $person }}</option>
           @endforeach
         </select>
       </div>

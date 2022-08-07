@@ -6,9 +6,7 @@
 
 @section('content')
 <div class="container">
-  <form action="" method="">
     <p>ご予約ありがとうございます</p>
-    <button type="submit">戻る</button>
-  </form>
+    <button type="button" onClick="history.back()">戻る</button>
 </div>
 @endsection
