@@ -22,11 +22,10 @@ Route::get('/done', [ReservationController::class, 'done']);
 Route::post('/done', [ReservationController::class, 'create']);
 Route::get('/register', [ShopController::class, 'register']);
 Route::post('/thanks', [ShopController::class, 'thanks']);
-Route::get('/auth', [ShopController::class,'check']);
+Route::get('/auth', [UserControllser::class,'check']);
 Route::get('/mypage', [UserControllser::class,'checkUser']);
 Route::post('/mypage', [UserControllser::class,'checkUser']);
-// アクセス先のリンク（shopのところ）は未確定↓
-Route::get('/shop', [ShopController::class, 'getlogout']);
+Route::get('/shop', [UserControllser::class, 'getlogout']);
 Route::get('/mypage', [UserControllser::class, 'index']);
 Route::get('/mypage/delete/', [UserControllser::class, 'delete']);
 Route::post('/mypage/delete/', [UserControllser::class, 'delete'])->name('mypage.delete');

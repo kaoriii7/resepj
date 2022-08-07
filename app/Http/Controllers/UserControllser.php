@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 class UserControllser extends Controller
 {
 
+    public function check(Request $request)
+    {
+      $text = ['text' => 'ログインして下さい。'];
+      return view('auth', $text);
+    }
+
     public function checkUser(Request $request)
     {
       $email = $request->email;
@@ -24,6 +30,12 @@ class UserControllser extends Controller
           $text = 'ログインに失敗しました';
           return view('auth', ['text' => $text]);
       }
+    }
+
+    public function getlogout()
+    {
+      Auth::logout();
+      return view('index');
     }
 
     public function index(Request $request)

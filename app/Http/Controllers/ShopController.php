@@ -72,18 +72,7 @@ class ShopController extends Controller
       return view('detail', compact('shop', 'times', 'persons', 'time_id', 'person_id'));
     }
 
-    public function check(Request $request)
-    {
-      $text = ['text' => 'ログインして下さい。'];
-      return view('auth', $text);
-    }
 
 
-
-    public function getlogout()
-    {
-      Auth::logout();
-      return view('index');
-    }
 
 }
